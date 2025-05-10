@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仕事獲得27の方法 - 黒板アート風インフォグラフィック</title>
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700&family=Yomogi&family=Kaisei+Decol:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== 基本設定 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'Yomogi', 'Kaisei Decol', serif;
+            background-color: #1a2a1a;
+            color: #e8e8e0;
+            line-height: 1.6;
+            font-size: 16px;
+            overflow-x: auto;
+        }
+
+        /* ===== 黒板コンテナ ===== */
+        .blackboard-container {
+            min-width: 1200px;
+            margin: 20px auto;
+            background-color: #1d2d1d;
+            border: 12px solid #8b4513;
+            border-radius: 8px;
+            box-shadow: 
+                inset 0 0 50px rgba(0, 0, 0, 0.3),
+                0 0 30px rgba(0, 0, 0, 0.4);
+            position: relative;
+            padding: 40px;
+            background-image: 
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 70%),
+                linear-gradient(35deg, transparent 49%, rgba(255, 255, 255, 0.01) 50%, transparent 51%);
+            background-size: 100px 100px, 200px 200px;
+        }
+
+        /* 木枠の装飾 */
+        .blackboard-container::before,
+        .blackboard-container::after {
+            content: '';
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #8b4513;
+            border: 2px solid #5c2e0a;
+            border-radius: 50%;
+        }
+
+        .blackboard-container::before {
+            top: -6px;
+            left: -6px;
+        }
+
+        .blackboard-container::after {
+            top: -6px;
+            right: -6px;
+        }
+
+        /* 左右の装飾ボルト */
+        .blackboard-container::after {
+            box-shadow: 
+                0 calc(100vh - 120px) 0 #8b4513,
+                calc(100vw - 60px) 0 0 #8b4513,
+                calc(100vw - 60px) calc(100vh - 120px) 0 #8b4513;
+        }
+
+        /* ===== チョーク効果の基本スタイル ===== */
+        .chalk {
+            text-shadow: 
+                1px 1px 0px rgba(255, 255, 255, 0.3),
+                0 0 3px rgba(255, 255, 255, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .chalk-white {
+            color: #e8e8e0;
+        }
+
+        .chalk-yellow {
+            color: #ffd700;
+        }
+
+        .chalk-blue {
+            color: #87ceeb;
+        }
+
+        .chalk-red {
+            color: #ff6b6b;
+        }
+
+        .chalk-green {
+            color: #98fb98;
+        }
+
+        /* ===== 見出しスタイル ===== */
+        .main-title {
+            text-align: center;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            transform: rotate(-1deg);
+            position: relative;
+        }
+
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 10%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, #e8e8e0, transparent);
+            opacity: 0.8;
+        }
+
+        .section-title {
+            font-size: 32px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            position: relative;
+            transform: skew(-2deg);
+            display: inline-block;
+        }
+
+        .section-title::before {
+            content: '✏️';
+            margin-right: 10px;
+            font-size: 0.8em;
+            vertical-align: middle;
+        }
+
+        .subsection-title {
+            font-size: 24px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.3);
+            padding-bottom: 5px;
+            display: inline-block;
+        }
+
+        /* ===== 導入部分 ===== */
+        .intro-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            border: 1px dashed rgba(255, 255, 255, 0.2);
+        }
+
+        .speaker-list {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .speaker {
+            text-align: center;
+            margin: 10px;
+        }
+
+        .speaker-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+
+        /* ===== 問題分析セクション ===== */
+        .problem-section {
+            margin: 40px 0;
+        }
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .problem-card {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #ff6b6b;
+            text-align: center;
+        }
+
+        .problem-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        /* ===== 27の方法グリッド ===== */
+        .methods-container {
+            margin: 40px 0;
+        }
+
+        .methods-section {
+            margin-bottom: 40px;
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+        .methods-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .method-card {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .method-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(5px);
+        }
+
+        .method-number {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 24px;
+            height: 24px;
+            background: #ff6b6b;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 2px 2px 0 rgba(0,0,0,0.3);
+        }
+
+        .method-name {
+            font-weight: bold;
+            color: #87ceeb;
+            margin-bottom: 8px;
+            padding-left: 20px;
+        }
+
+        .method-description {
+            font-size: 14px;
+            color: #e8e8e0;
+            line-height: 1.6;
+        }
+
+        /* ===== 重要ポイント ===== */
+        .key-points {
+            margin: 40px 0;
+            padding: 20px;
+            background: rgba(255, 215, 0, 0.1);
+            border-left: 5px solid #ffd700;
+            border-radius: 5px;
+        }
+
+        .key-points ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .key-points li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+        }
+
+        .key-points li::before {
+            content: '★';
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+        }
+
+        /* ===== 実績・事例セクション ===== */
+        .examples-section {
+            margin: 40px 0;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .example-card {
+            background: rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .example-author {
+            font-weight: bold;
+            color: #87ceeb;
+            margin-bottom: 10px;
+        }
+
+        .example-achievement {
+            color: #98fb98;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* ===== 名言・引用 ===== */
+        .quote-section {
+            margin: 40px 20px;
+            padding: 20px 30px;
+            border-left: 5px solid #ff6b6b;
+            background: rgba(255, 107, 107, 0.05);
+            font-style: italic;
+            position: relative;
+        }
+
+        .quote-section::before {
+            content: '"';
+            font-size: 60px;
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            color: #ff6b6b;
+            opacity: 0.3;
+        }
+
+        /* ===== まとめセクション ===== */
+        .conclusion-section {
+            margin-top: 50px;
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .action-button {
+            padding: 12px 25px;
+            background-color: #87ceeb;
+            color: #000;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+            border: 2px solid #000;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .action-button:hover {
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 rgba(0,0,0,0.3);
+        }
+
+        /* ===== フッター ===== */
+        .blackboard-footer {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 14px;
+            opacity: 0.8;
+            border-top: 1px dashed rgba(255, 255, 255, 0.3);
+            padding-top: 20px;
+        }
+
+        /* ===== レスポンシブデザイン ===== */
+        @media (max-width: 1200px) {
+            .blackboard-container {
+                min-width: 800px;
+            }
+            
+            .methods-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .examples-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .blackboard-container {
+                min-width: 100%;
+                padding: 20px;
+                border-width: 8px;
+            }
+
+            .main-title {
+                font-size: 36px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            .methods-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .problem-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .speaker-list {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* チョークの粉効果 */
+        @keyframes chalk-dust {
+            0% {
+                opacity: 0;
+                transform: translateY(0) scale(0);
+            }
+            50% {
+                opacity: 0.3;
+                transform: translateY(-10px) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-20px) scale(1.5);
+            }
+        }
+
+        .chalk-dust {
+            position: relative;
+        }
+
+        .chalk-dust::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background: #e8e8e0;
+            border-radius: 50%;
+            animation: chalk-dust 0.5s ease-out;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="blackboard-container">
+        <!-- メインタイトル -->
+        <h1 class="main-title chalk chalk-white fade-in">
+            仕事獲得27の方法
+        </h1>
+        <p class="chalk chalk-yellow text-center" style="text-align: center; margin-bottom: 30px;">〜 フリーランス・起業家必修授業 〜</p>
+
+        <!-- 講師紹介 -->
+        <section class="intro-section">
+            <div class="speaker-list">
+                <div class="speaker">
+                    <div class="speaker-name chalk">まみさん</div>
+                    <p class="chalk chalk-blue">イベント＆セミナープロデューサー</p>
+                    <p class="chalk chalk-white">動画クリエイター・ライブナビゲーター講師</p>
+                </div>
+                <div class="speaker">
+                    <div class="speaker-name chalk">伊勢一生さん</div>
+                    <p class="chalk chalk-blue">プロモーションライター・プロデューサー</p>
+                    <p class="chalk chalk-white">元消防士→独立6年間の実績</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 問題分析セクション -->
+        <section class="problem-section">
+            <h2 class="section-title chalk chalk-green">📊 フリーランスが直面する3つの課題</h2>
+            <div class="problem-grid">
+                <div class="problem-card">
+                    <div class="problem-icon">😰</div>
+                    <h3 class="chalk chalk-yellow">1. マインドの問題</h3>
+                    <p class="chalk chalk-white">雇われとフリーランスの<br>考え方の違いを理解していない</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">😔</div>
+                    <h3 class="chalk chalk-yellow">2. 自信がない</h3>
+                    <p class="chalk chalk-white">自信がないことが言葉や<br>言動に表れてチャンスを逃す</p>
+                </div>
+                <div class="problem-card">
+                    <div class="problem-icon">📚</div>
+                    <h3 class="chalk chalk-yellow">3. 知識不足</h3>
+                    <p class="chalk chalk-white">仕事を自分で取る方法を<br>知らないだけ</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重要なマインドセット -->
+        <section class="key-points">
+            <h2 class="section-title chalk chalk-red">💡 成功するための重要マインド</h2>
+            <ul>
+                <li class="chalk chalk-white">フリーランスは<span class="chalk chalk-yellow">「やりたいです！」</span>から始まる</li>
+                <li class="chalk chalk-white">クライアントも<span class="chalk chalk-yellow">ジャッジされている</span> - 対等な関係</li>
+                <li class="chalk chalk-white">自信は<span class="chalk chalk-yellow">実績で作る</span> - カットモデルのように無料から始める</li>
+                <li class="chalk chalk-white">コラボは<span class="chalk chalk-yellow">巨人の肩に乗る</span>最速の成長法</li>
+            </ul>
+        </section>
+
+        <!-- 仕事獲得27の方法 -->
+        <section class="methods-container">
+            <h2 class="section-title chalk chalk-blue">🎯 仕事獲得27の方法</h2>
+            
+            <!-- 初級編 -->
+            <div class="methods-section">
+                <h3 class="subsection-title chalk chalk-green">基本編<span class="level-badge chalk chalk-yellow">初級</span></h3>
+                <div class="methods-grid">
+                    <div class="method-card">
+                        <div class="method-number">1</div>
+                        <div class="method-name">知人友人への連絡</div>
+                        <div class="method-description">まずは「何者か」を伝える。紹介してねと一言添える</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">2</div>
+                        <div class="method-name">紹介の活用</div>
+                        <div class="method-description">紹介キャンペーン・アフィリエイト制度の活用</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">3</div>
+                        <div class="method-name">交流会・イベント参加</div>
+                        <div class="method-description">見込み客のリストを集める。お礼メールは必須！</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">4</div>
+                        <div class="method-name">オンラインサロン参加</div>
+                        <div class="method-description">受け身はNG。運営に携わりギブしまくる</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">5</div>
+                        <div class="method-name">コラボ・ジョイントベンチャー</div>
+                        <div class="method-description">先輩と組む。無料からスタートも有効</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">6</div>
+                        <div class="method-name">SNSで仕事探し</div>
+                        <div class="method-description">募集投稿への即レス、DMでの直接営業</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">7</div>
+                        <div class="method-name">SNS発信</div>
+                        <div class="method-description">3つ以上の独自化が重要（職種×特徴×地域など）</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">8</div>
+                        <div class="method-name">フリーランスポータル</div>
+                        <div class="method-description">クラウドワークス、ランサーズの活用</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">9</div>
+                        <div class="method-name">求人サイト活用</div>
+                        <div class="method-description">業務委託案件が豊富。複数契約も可能</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 中級編 -->
+            <div class="methods-section">
+                <h3 class="subsection-title chalk chalk-green">実践編<span class="level-badge chalk chalk-yellow">中級</span></h3>
+                <div class="methods-grid">
+                    <div class="method-card">
+                        <div class="method-number">10</div>
+                        <div class="method-name">セミナーポータル</div>
+                        <div class="method-description">セミナーズ、ピーティックス登録</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">11</div>
+                        <div class="method-name">検索型ポータル</div>
+                        <div class="method-description">ストアカ、タイムチケット活用</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">12</div>
+                        <div class="method-name">企業HPへの問い合わせ</div>
+                        <div class="method-description">正社員募集でも業務委託に変更可能な場合あり</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">13</div>
+                        <div class="method-name">役所・公共団体へ問い合わせ</div>
+                        <div class="method-description">単価が高い！1案件150万円も</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">14</div>
+                        <div class="method-name">FAX DM</div>
+                        <div class="method-description">地方企業には特に有効</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">15</div>
+                        <div class="method-name">集客代行会社</div>
+                        <div class="method-description">月100人集客可能。予算組めるなら活用</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">16</div>
+                        <div class="method-name">セミナー代行</div>
+                        <div class="method-description">ウェブセミナー総研など。話すだけでOK</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">17</div>
+                        <div class="method-name">営業代行</div>
+                        <div class="method-description">DM送信、テレアポ代行</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">18</div>
+                        <div class="method-name">ポスティング</div>
+                        <div class="method-description">店舗型ビジネスに効果的</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 上級編 -->
+            <div class="methods-section">
+                <h3 class="subsection-title chalk chalk-green">マーケティング編<span class="level-badge chalk chalk-yellow">上級</span></h3>
+                <div class="methods-grid">
+                    <div class="method-card">
+                        <div class="method-number">19</div>
+                        <div class="method-name">新聞織込みチラシ</div>
+                        <div class="method-description">地域密着型ビジネスに最適</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">20</div>
+                        <div class="method-name">地域情報誌・フリーペーパー</div>
+                        <div class="method-description">ターゲットの絞り込みが可能</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">21</div>
+                        <div class="method-name">SNS広告</div>
+                        <div class="method-description">Facebook、Instagram、YouTube、TikTok</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">22</div>
+                        <div class="method-name">WEB広告</div>
+                        <div class="method-description">Google、Yahoo!リスティング広告</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">23</div>
+                        <div class="method-name">メルマガ広告</div>
+                        <div class="method-description">川島一松さん、頑張れ社長メルマガなど</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">24</div>
+                        <div class="method-name">新聞・雑誌掲載</div>
+                        <div class="method-description">権威性を獲得。地方テレビCMも5万円から</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">25</div>
+                        <div class="method-name">プレスリリース</div>
+                        <div class="method-description">PR TIMESなど。月1万円でOK</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">26</div>
+                        <div class="method-name">スポンサー契約</div>
+                        <div class="method-description">イベント、花火大会などの協賛</div>
+                    </div>
+                    <div class="method-card">
+                        <div class="method-number">27</div>
+                        <div class="method-name">ブース出展</div>
+                        <div class="method-description">セミナー・イベントへの出展</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 成功事例 -->
+        <section class="examples-section">
+            <h2 class="section-title chalk chalk-red">✨ 実績例</h2>
+            <div class="examples-grid">
+                <div class="example-card">
+                    <div class="example-author">まみさん</div>
+                    <div class="example-achievement">月商1500万円の5日間動画集客</div>
+                    <p class="chalk chalk-white">企画書・提案書で案件獲得率100%</p>
+                </div>
+                <div class="example-card">
+                    <div class="example-author">伊勢さん</div>
+                    <div class="example-achievement">メルマガ1通1万円、月約20万円×5社の継続契約</div>
+                    <p class="chalk chalk-white">最高案件358万円の成果報酬</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 重要な教え -->
+        <section class="quote-section">
+            <p class="chalk chalk-white">
+                「できないことも、まず全部できますって言う。できる人を探してくればいい。<br>
+                フリーランスは基本的にチームで仕事をすること！」
+            </p>
+            <cite class="chalk chalk-blue">— 伊勢一生</cite>
+        </section>
+
+        <!-- 単価アップのヒント -->
+        <section class="key-points">
+            <h2 class="section-title chalk chalk-green">💰 単価アップの秘訣</h2>
+            <ul>
+                <li class="chalk chalk-white">相場のわからないサービスほど<span class="chalk chalk-yellow">高単価</span>にできる</li>
+                <li class="chalk chalk-white"><span class="chalk chalk-yellow">お客さんを変える</span> - 1億超えの中小企業をターゲットに</li>
+                <li class="chalk chalk-white"><span class="chalk chalk-yellow">動画編集者で終わらない</span> - プロデューサーへ進化</li>
+                <li class="chalk chalk-white">3つ以上の独自化を図る（職種×特徴×地域など）</li>
+            </ul>
+        </section>
+
+        <!-- 行動促進 -->
+        <section class="conclusion-section">
+            <h2 class="section-title chalk chalk-blue">🚀 今すぐ行動しよう！</h2>
+            <p class="chalk chalk-white">
+                知識があっても行動しなければ意味がない。<br>
+                今日から1つでも実践してみませんか？
+            </p>
+            <div class="action-buttons">
+                <a href="#" class="action-button">個別相談に申し込む</a>
+                <a href="#" class="action-button">SNSで宣言する</a>
+            </div>
+        </section>
+
+        <!-- フッター -->
+        <footer class="blackboard-footer">
+            <p class="chalk chalk-white">
+                Created with ❤️ for ambitious freelancers
+            </p>
+            <p class="chalk chalk-yellow">
+                "仕事獲得は、知識ではなく行動！"
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        // 簡単なアニメーション効果
+        document.addEventListener('DOMContentLoaded', function() {
+            // スクロールで要素をフェードイン
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach((element, index) => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                
+                setTimeout(() => {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // マウスオーバーでチョークの粉効果（簡易版）
+            const chalkElements = document.querySelectorAll('.chalk');
+            chalkElements.forEach(element => {
+                element.addEventListener('mouseover', function() {
+                    this.style.textShadow = '1px 1px 0px rgba(255, 255, 255, 0.5), 0 0 8px rgba(255, 255, 255, 0.4)';
+                });
+                element.addEventListener('mouseout', function() {
+                    this.style.textShadow = '1px 1px 0px rgba(255, 255, 255, 0.3), 0 0 3px rgba(255, 255, 255, 0.2)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
